@@ -1,78 +1,96 @@
 package fecha;
 
 public class Fecha {
-	private int d; //día
-	private int m; //mes
-	private int a; //año
+	/** guardarÃ¡ el dÃ­a de la propia fecha */
+	private int dia; 
+	/** guardarÃ¡ el mes de la propia fecha */
+	private int mes; 
+	/** guardarÃ¡ el anio de la propia fecha */
+	private int a; 
 
-	
+	/** Constructor VacÃ­o de la clase Fecha*/
 	public Fecha() {
 
 	}
 
-	
+	/** Constructor de la clase Fecha
+	 * @param dia representa el dia de la fecha
+	 * @param mes represetna el mes de la fecha
+	 * @param anio represetna el aÃ±o de la fecha
+	 * */
 	public Fecha(int dia, int mes, int anio) {
-		this.d = dia;
-		this.m = mes;
+		this.dia = dia;
+		this.mes = mes;
 		this.a = anio;
 	}
 
 	
-	
+	/** 
+	 * Comprueba que una fecha es correcta
+	 * @return True si la fecha es correcta false si no lo es.
+	 * */
 	public boolean fechaCorrecta() {
 		boolean diaCorrecto, mesCorrecto, anioCorrecto;
 		anioCorrecto = a > 0;
-		mesCorrecto = m >= 1 && m <= 12;
-		switch (m) {
+		mesCorrecto = mes >= 1 && mes <= 12;
+		boolean diaMayor1 = dia >= 1;
+		switch (mes) {
 		case 2:
 			if (esBisiesto()) {
-				diaCorrecto = d >= 1 && d <= 29;
+				diaCorrecto = diaMayor1 && dia <= 29;
 			} else {
-				diaCorrecto = d >= 1 && d <= 28;
+				diaCorrecto = diaMayor1 && dia <= 28;
 			}
 			break;
 		case 4:
 		case 6:
 		case 9:
 		case 11:
-			diaCorrecto = d >= 1 && d <= 30;
+			diaCorrecto = diaMayor1 && dia <= 30;
 			break;
 		default:
-			diaCorrecto = d >= 1 && d <= 31;
+			diaCorrecto = diaMayor1 && dia <= 31;
 		}
 		return diaCorrecto && mesCorrecto && anioCorrecto;
 	}
 
-	// Método esBisiesto. Solo lo usa fechaCorrecta, por eso es privado
+	/** MÃ©todo esBisiesto
+	 * @return devuelve true si el aÃ±o es bisiesto falso si no lo es */
 	private boolean esBisiesto() {
-		boolean esBisiesto = (a % 4 == 0 && a % 100 != 0 || a % 400 == 0);
-		return esBisiesto;
+		return (a % 4 == 0 && a % 100 != 0 || a % 400 == 0);
 	}
 
-	// Método diaSiguiente
-	public void diaSiguiente() {
-		d++;
+	/**
+	 * MÃ©todo diaSiguiente
+	 * */
+	public void nextDay() {
+		dia++;
 		if (!fechaCorrecta()) {
-			d = 1;
-			m++;
+			dia = 1;
+			mes++;
 			if (!fechaCorrecta()) {
-				m = 1;
+				mes = 1;
 				a++;
 			}
 		}
 	}
 
-	// Método toString
+	/**
+	 * Convierte la fecha a un String
+	 * @return String que contiene la fecha
+	 * */
 	public String toString() {
-		if (d < 10 && m < 10) {
-			return "0" + d + "-0" + m + "-" + a;
-		} else if (d < 10 && m >= 10) {
-			return "0" + d + "-" + m + "-" + a;
-		} else if (d >= 10 && m < 10) {
-			return d + "-0" + m + "-" + a;
+		String fecha = "";
+		if (dia < 10 && mes < 10) {
+			fecha = "0" + dia + "-0" + mes + "-" + a;
+		} else if (dia < 10 && mes >= 10) {
+			fecha =  "0" + dia + "-" + mes + "-" + a;
+		} else if (dia >= 10 && mes < 10) {
+			fecha = dia + "-0" + mes + "-" + a;
 		} else {
-			return d + "-" + m + "-" + a;
+			fecha = dia + "-" + mes + "-" + a;
 		}
+		return fecha;
 	}
 
 }
