@@ -6,7 +6,7 @@ public class Fecha {
 	/** guardará el mes de la propia fecha */
 	private int mes; 
 	/** guardará el anio de la propia fecha */
-	private int a; 
+	private int anio; 
 
 	/** Constructor Vacío de la clase Fecha*/
 	public Fecha() {
@@ -21,7 +21,7 @@ public class Fecha {
 	public Fecha(int dia, int mes, int anio) {
 		this.dia = dia;
 		this.mes = mes;
-		this.a = anio;
+		this.anio = anio;
 	}
 
 	
@@ -31,7 +31,7 @@ public class Fecha {
 	 * */
 	public boolean fechaCorrecta() {
 		boolean diaCorrecto, mesCorrecto, anioCorrecto;
-		anioCorrecto = a > 0;
+		anioCorrecto = anio > 0;
 		mesCorrecto = mes >= 1 && mes <= 12;
 		boolean diaMayor1 = dia >= 1;
 		switch (mes) {
@@ -57,7 +57,7 @@ public class Fecha {
 	/** Método esBisiesto
 	 * @return devuelve true si el año es bisiesto falso si no lo es */
 	private boolean esBisiesto() {
-		return a % 4 == 0 && a % 100 != 0 || a % 400 == 0;
+		return anio % 4 == 0 && anio % 100 != 0 || anio % 400 == 0;
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class Fecha {
 			mes++;
 			if (!fechaCorrecta()) {
 				mes = 1;
-				a++;
+				anio++;
 			}
 		}
 	}
@@ -82,13 +82,13 @@ public class Fecha {
 	public String toString() {
 		String fecha = "";
 		if (dia < 10 && mes < 10) {
-			fecha = "0" + dia + "-0" + mes + "-" + a;
+			fecha = "0" + dia + "-0" + mes + "-" + anio;
 		} else if (dia < 10 && mes >= 10) {
-			fecha =  "0" + dia + "-" + mes + "-" + a;
+			fecha =  "0" + dia + "-" + mes + "-" + anio;
 		} else if (dia >= 10 && mes < 10) {
-			fecha = dia + "-0" + mes + "-" + a;
+			fecha = dia + "-0" + mes + "-" + anio;
 		} else {
-			fecha = dia + "-" + mes + "-" + a;
+			fecha = dia + "-" + mes + "-" + anio;
 		}
 		return fecha;
 	}
