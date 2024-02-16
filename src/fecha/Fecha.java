@@ -57,7 +57,7 @@ public class Fecha {
 	/** Método esBisiesto
 	 * @return devuelve true si el año es bisiesto falso si no lo es */
 	private boolean esBisiesto() {
-		return (a % 4 == 0 && a % 100 != 0 || a % 400 == 0);
+		return a % 4 == 0 && a % 100 != 0 || a % 400 == 0;
 	}
 
 	/**
